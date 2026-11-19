@@ -1,0 +1,28 @@
+{
+  "name": "heptapod-sentinel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "cloudflare": {
+    "bindings": {
+      "INSTANCE_URL": { "description": "Your Heptapod HTTPS origin, without a path." },
+      "PING_TOKEN": { "description": "Generate a random secret with `openssl rand -hex 32`." },
+      "WEBHOOK_URL": { "description": "HTTPS webhook accepting POST JSON. Required for the default button setup; other notifier choices are documented in README." }
+    }
+  },
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "types": "wrangler types --strict-vars false",
+    "lint": "node scripts/lint.mjs",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test/tsconfig.json",
+    "test": "vitest run",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.3.7",
+    "typescript": "6.0.3",
+    "vitest": "4.1.11",
+    "wrangler": "4.148.0"
+  }
+}

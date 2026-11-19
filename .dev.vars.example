@@ -1,0 +1,12 @@
+# Generate PING_TOKEN with: openssl rand -hex 32
+PING_TOKEN=
+# Default button setup: a HTTPS webhook that accepts POST JSON.
+WEBHOOK_URL=
+# Other options (leave unused settings absent, not populated with examples):
+# NTFY_URL=
+# NTFY_TOKEN=
+# BREVO_API_KEY=
+# BREVO_FROM=
+# BREVO_TO=
+# CF_EMAIL_FROM=
+# CF_EMAIL_TO=

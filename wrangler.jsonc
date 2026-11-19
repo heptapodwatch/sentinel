@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "heptapod-sentinel",
+  "main": "src/index.ts",
+  // Shared by local dev and tests; both pinned tools use workerd 1.20261006.1,
+  // which supports dates through 2026-10-13. Use today's non-future date.
+  "compatibility_date": "2026-10-11",
+  "workers_dev": true,
+  "vars": {
+    "INSTANCE_URL": "https://your-instance.example.com",
+    "GRACE_SECONDS": "300",
+    "UP_TIMEOUT_SECONDS": "10",
+    "NOTIFIER_TIMEOUT_SECONDS": "10"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "SENTINEL", "class_name": "Sentinel" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Sentinel"] }],
+  "triggers": { "crons": ["*/5 * * * *"] },
+  // Add send_email only if you choose Cloudflare email. See README.
+  "observability": {
+    "enabled": true,
+    // Invocation URLs contain the token. Do not retain them in Workers Logs.
+    "logs": { "enabled": true, "invocation_logs": false },
+    "traces": { "enabled": false }
+  }
+}
